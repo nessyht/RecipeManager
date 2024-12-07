@@ -4,9 +4,10 @@ import { Instruction } from './Instruction.js';
 export class Recipe {
     constructor(name, ingredients, instructions) {
         this.name = name;
-        this.ingredients = ingredients.map(
-            ({ quantity, unit, name }) => new Ingredient(quantity, unit, name)
-        ); // Array of Ingredient objects
+        this.ingredients = ingredients.map(({ name, quantity, unit, notes }) => {
+            return new Ingredient(name, quantity, unit, notes || null);
+        });
+
         this.instructions = instructions.map(
             text => new Instruction(text)
         ); // Array of Instruction objects
@@ -16,7 +17,6 @@ export class Recipe {
         this.ingredients.forEach(ingredient => {
             ingredient.scaleIngredient(multiplier);
         });
-        console.log(this.ingredients);
     }
 
     resetRecipeScaling() {
@@ -36,7 +36,7 @@ export class Recipe {
 
         // Render ingredients
         const ingredientsSection = document.createElement('div');
-        ingredientsSection.innerHTML = '<h3>Ingredients</h3>';
+        ingredientsSection.innerHTML = '<h3 class="tts-enabled">Ingredients</h3>';
         const ingredientsList = document.createElement('ul');
         this.ingredients.forEach(ingredient => {
             ingredientsList.appendChild(ingredient.render());

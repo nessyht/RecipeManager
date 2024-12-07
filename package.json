@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "browserify": "^17.0.1",
+    "convert-units": "^2.3.4",
     "express": "^4.21.1"
   }
 }

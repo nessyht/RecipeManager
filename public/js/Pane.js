@@ -1,4 +1,5 @@
 export class Pane {
+
     constructor(recipe) {
         this.recipe = recipe;
         this.element = null;
@@ -28,10 +29,11 @@ export class Pane {
                     <button data-scale="1">x1</button>
                     <button data-scale="2">x2</button>
                     <button data-scale="3">x3</button>
+                    <input type="range" min="0.5", max="20" step="0.5" class="custom-scale-input">
                     <button class="custom-scale-btn">Custom</button>
-                    </div>
-                    </div>
-                    `;
+                </div>
+            </div>
+        `;
 
         const paneContent = document.createElement('div');
         paneContent.className = "pane-content";
@@ -48,6 +50,14 @@ export class Pane {
         this.addEventListeners();
     }
 
+    addTTSEventListeners() {
+        // Text-to-Speech for elements with the `tts-enabled` class
+        this.element.querySelectorAll('.tts-enabled').forEach(item => {
+            item.addEventListener('click', () => this.textToSpeech(item)); // {capture: true, once: true}
+        });
+
+    }
+
     addEventListeners() {
         // Close button
         this.element.querySelector('.close-btn').addEventListener('click', () => {
@@ -60,20 +70,27 @@ export class Pane {
         this.element.querySelector('.text-large').addEventListener('click', () => this.setTextSize('large'));
 
 
-        // Text-to-Speech for elements with the `tts-enabled` class
-        this.element.querySelectorAll('.tts-enabled').forEach(item => {
-            item.addEventListener('click', () => this.textToSpeech(item.dataset.text));
-        });
+        this.addTTSEventListeners();
 
         // Scaling buttons
         this.element.querySelectorAll('.scaling-buttons button').forEach(button => {
             button.addEventListener('click', event => this.scaleRecipe(event.target.dataset.scale));
         });
+
         // Custom scale button
+        this.element.querySelector('.custom-scale-input').addEventListener('input', input => {
+            const multiplier_val = this.element.querySelector('.custom-scale-input').value;
+            this.element.querySelector('.custom-scale-btn').textContent = `${multiplier_val}X`;
+            this.scaleRecipe(multiplier_val);
+        });
+
         this.element.querySelector('.custom-scale-btn').addEventListener('click', () => {
-            const customScale = prompt('Enter a custom multiplier (e.g., 1.5):');
-            if (customScale && !isNaN(customScale)) {
-                this.scaleRecipe(customScale);
+            const customScaleInput = this.element.querySelector('.custom-scale-input');
+            const customScaleValue = customScaleInput.value;
+
+            console.log(customScaleValue);
+            if (customScaleValue && !isNaN(customScaleValue)) {
+                this.scaleRecipe(customScaleValue);
             }
         });
     }
@@ -95,11 +112,15 @@ export class Pane {
         const recipeContainer = this.element.querySelector('.recipe-container');
 
         recipeContainer.replaceWith(this.recipe.render());
-        this.addEventListeners();
+        this.addTTSEventListeners();
     }
 
-    textToSpeech(text) {
+    textToSpeech(item) {
+
+
+        const text = item.dataset.text;
         const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "de-DE";
         speechSynthesis.speak(utterance);
     }
 }
