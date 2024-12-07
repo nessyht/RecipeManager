@@ -116,10 +116,18 @@ export class Pane {
     }
 
     textToSpeech(item) {
+        var text_to_speak = null;
+        if (item.classList.contains("recipe-heading")) {
+            text_to_speak = this.recipe.reading_text()
+        } else if (item.classList.contains("ingredients-heading")) {
+            text_to_speak = this.recipe.ingredients_reading_text()
+        } else if (item.classList.contains("instructions-heading")) {
+            text_to_speak = this.recipe.instructions_reading_text()
+        } else {
+            text_to_speak = item.dataset.text;
+        }
 
-
-        const text = item.dataset.text;
-        const utterance = new SpeechSynthesisUtterance(text);
+        const utterance = new SpeechSynthesisUtterance(text_to_speak);
         utterance.lang = "de-DE";
         speechSynthesis.speak(utterance);
     }
