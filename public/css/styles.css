@@ -85,6 +85,83 @@ body {
     border-radius: 4px;
 }
 
+.pane-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    padding: 1em;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.text-size-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+    height: 20%;
+}
+
+.text-size-buttons button {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.custom-scale-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.custom-scale-container button {
+    margin: 5px 0;
+    font-size: 16px;
+    width: 50px;
+}
+
+.custom-scale-slider {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.custom-scale-input {
+    width: calc(100% - 40px);
+    text-align: center;
+    /* Adjust for button width */
+}
+
+.custom-scale-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.custom-scale-btn {
+    width: 100px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+
 .pane.small {
     font-size: 0.8rem;
 }
@@ -117,4 +194,19 @@ body {
 
 .tts-enabled:hover {
     color: #0056b3;
+}
+
+.quantity-wrapper {
+    display: inline-block;
+}
+
+.quantity-text {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.quantity-input {
+    display: inline-block;
+    width: 50px;
+    border: none;
 }

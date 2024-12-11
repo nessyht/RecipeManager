@@ -19,6 +19,16 @@ export class Recipe {
         });
     }
 
+    get_ingredient_by_id(id) {
+        return this.ingredients.find(ingredient => ingredient.id === id);
+    }
+
+    get_scaling_from_ingredient(id, comp_val, comp_unit) {
+        const ingredient = this.get_ingredient_by_id(id);
+        console.log(ingredient);
+        return ingredient.get_scaling(comp_val, comp_unit);
+    }
+
     resetRecipeScaling() {
         this.ingredients.forEach(ingredient => {
             ingredient.reset();
@@ -28,8 +38,7 @@ export class Recipe {
     ingredients_reading_text() {
         var ingredient_tts_text = "";
         this.ingredients.forEach((ingredient) => {
-            console.log(ingredient);
-            ingredient_tts_text += ingredient.quantity + " " + ingredient.unit + ", " + ingredient.name + ", ";
+            ingredient_tts_text += ingredient.get_tts_text() + ", ";
         });
 
         return ingredient_tts_text
@@ -39,13 +48,13 @@ export class Recipe {
         var instructions_tts_text = "";
         this.instructions.forEach((instruction) => {
             console.log(instruction);
-            instructions_tts_text += instruction.text + ", ";
+            instructions_tts_text += instruction.get_tts_text() + ", ";
         });
 
         return instructions_tts_text
     }
 
-    reading_text() {
+    get_tts_text() {
         return this.ingredients_reading_text() + ", " + this.instructions_reading_text();
     }
 
