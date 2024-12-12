@@ -70,10 +70,13 @@ export class Ingredient {
         }
     }
 
-    get_tts_text() {
-        return this.quantity + " " + this.unit_to_speech() + " " + this.name;
+    quantity_tts() {
+        return `${parseFloat(parseFloat(this.quantity.toString()).toFixed(4))}`;
     }
 
+    get_tts_text() {
+        return this.quantity_tts() + " " + this.unit_to_speech() + " " + this.name;
+    }
 
     render() {
         this.scaleUnit();
@@ -81,7 +84,7 @@ export class Ingredient {
         const listItem = document.createElement('li');
         listItem.id = this.id;
         listItem.innerHTML = `
-            <input type="text" class="quantity-input" data-unit="${this.unit}" value="${parseFloat(parseFloat(this.quantity.toString()).toFixed(4))}">
+            <input type="text" class="quantity-input" data-unit="${this.unit}" value="${this.quantity_tts()}">
             <span class="unit">${this.unit}</span>
             <span class="description">${this.name}</span>
         `

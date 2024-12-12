@@ -24,16 +24,16 @@ export class Pane {
                 <button class="text-medium">A</button>
                 <button class="text-large">A+</button>
             </div>
+            <input class="custom-scale-slider" type="range" min="0.5" max="20" step="0.5">
             <div class="custom-scale-container">
                 <button data-scale="0.5">x0.5</button>
                 <button data-scale="1">reset</button>
                 <button data-scale="2">x2</button>
                 <button data-scale="3">x3</button>
             </div>
-            <input class="custom-scale-slider" type="range" min="0.5" max="20" step="0.5">
             <div class="custom-scale-box">
-                <input class="custom-scale-input" type="text" placeholder="How much?">
-                <button class="custom-scale-btn">Custom</button>
+                <input class="custom-scale-input" type="text" placeholder="Standard Rezept">
+                <button class="custom-scale-btn">Anpassen</button>
             </div>
         </div>
         `;
@@ -107,15 +107,15 @@ export class Pane {
         });
 
         // Text size buttons
-        this.element.querySelector('.text-small').addEventListener('click', () => this.setTextSize('small'));
-        this.element.querySelector('.text-medium').addEventListener('click', () => this.setTextSize('medium'));
-        this.element.querySelector('.text-large').addEventListener('click', () => this.setTextSize('large'));
+        this.element.querySelector('.text-small').addEventListener('click', () => this.setTextSize('smaller'));
+        this.element.querySelector('.text-medium').addEventListener('click', () => this.setTextSize('reset'));
+        this.element.querySelector('.text-large').addEventListener('click', () => this.setTextSize('larger'));
 
 
         this.addTTSEventListeners();
         this.addIngredientEventListeners();
         // Scaling buttons
-        this.element.querySelectorAll('.scaling-buttons button').forEach(button => {
+        this.element.querySelectorAll('.custom-scale-container button').forEach(button => {
             button.addEventListener('click', event => this.scaleRecipe(event.target.dataset.scale));
         });
 
@@ -141,6 +141,7 @@ export class Pane {
         this.textSize = size;
         this.element.className = `pane ${this.textSize}`;
     }
+
 
     // TODO: Mark active option
     scaleRecipe(multiplier) {

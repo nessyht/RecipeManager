@@ -38,6 +38,11 @@ body {
     transition: background 0.3s;
 }
 
+.rail h3 {
+    margin: 0;
+    padding: 1em 0;
+}
+
 .rail ul li:hover {
     background: #d4d4d4;
 }
@@ -62,6 +67,7 @@ body {
     padding: 1rem;
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
 }
 
 .pane-header {
@@ -71,16 +77,27 @@ body {
     margin-bottom: 1rem;
 }
 
+.text-size-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 65%;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    border-bottom: dashed blue;
+}
+
 .text-size-buttons button,
-.scaling-buttons button {
+.custom-scale-container button {
     margin: 0 0.2rem;
     padding: 0.4rem;
-    font-size: 0.8rem;
     cursor: pointer;
+    width: 50px;
 }
 
 .text-size-buttons button:hover,
-.scaling-buttons button:hover {
+.custom-scale-container button:hover {
     background: #eaeaea;
     border-radius: 4px;
 }
@@ -92,7 +109,6 @@ body {
     align-items: flex-start;
     padding: 10px;
     position: relative;
-    width: 100%;
     padding: 1em;
 }
 
@@ -106,31 +122,21 @@ body {
     cursor: pointer;
 }
 
-.text-size-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 20%;
-    height: 20%;
-}
 
-.text-size-buttons button {
+/* .text-size-buttons button {
     margin: 5px 0;
-    font-size: 16px;
-}
+} */
 
 .custom-scale-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
 }
 
 .custom-scale-container button {
     margin: 5px 0;
-    font-size: 16px;
     width: 50px;
 }
 
@@ -140,18 +146,23 @@ body {
 }
 
 .custom-scale-input {
-    width: calc(100% - 40px);
+    max-width: 120px;
     text-align: center;
-    /* Adjust for button width */
+    margin: 5px 0;
+    border-radius: 5px;
 }
 
 .custom-scale-box {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
 }
 
 .custom-scale-btn {
     width: 100px;
+    height: 45px;
+    margin: 5px;
     background-color: #007BFF;
     color: white;
     border: none;
@@ -162,23 +173,22 @@ body {
 }
 
 
-.pane.small {
-    font-size: 0.8rem;
+.pane.smaller {
+    font-size: 1em;
 }
 
-.pane.medium {
-    font-size: 1rem;
+.pane.reset {
+    font-size: 1.2em;
 }
 
-.pane.large {
-    font-size: 1.2rem;
+.pane.larger {
+    font-size: 1.4em;
 }
 
 .close-btn {
     background: red;
     color: white;
     border: none;
-    padding: 0.5rem;
     cursor: pointer;
 }
 
@@ -196,17 +206,17 @@ body {
     color: #0056b3;
 }
 
-.quantity-wrapper {
-    display: inline-block;
-}
-
 .quantity-text {
     cursor: pointer;
-    display: inline-block;
 }
 
 .quantity-input {
-    display: inline-block;
     width: 50px;
+    padding: 3px;
+    font-size: 1em;
     border: none;
+}
+
+.ingredient .unit {
+    width: 25px !important;
 }
